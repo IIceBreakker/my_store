@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.boss.mystore.mapper.AccountMapper">
+    <select id="queryByUsernameAndPassword" resultType="Account">
+        SELECT
+            account.username,
+            account.city,
+            account.country,
+            account.zip,
+            account.phone,
+            account.address
+        FROM account
+        WHERE username = #{username}
+        AND password = #{password}
+    </select>
+
+    <select id="queryByUsername" resultType="Account">
+        SELECT
+            account.username,
+            account.city,
+            account.country,
+            account.zip,
+            account.phone,
+            account.address
+        FROM account
+        WHERE account.username = #{username}
+    </select>
+</mapper>

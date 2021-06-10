@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <!--打印执行的sql语句-->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias alias="Account" type="com.boss.mystore.pojo.po.Account" />
+        <typeAlias alias="Cart" type="com.boss.mystore.pojo.po.Cart" />
+        <typeAlias alias="Item" type="com.boss.mystore.pojo.po.Item" />
+        <typeAlias alias="Order" type="com.boss.mystore.pojo.po.Order" />
+        <typeAlias alias="Integer" type="java.lang.Integer" />
+        <typeAlias alias="Long" type="java.lang.Long" />
+        <typeAlias alias="String" type="java.lang.String" />
+        <typeAlias alias="Date" type="java.util.Date" />
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="mapper/AccountMapper.xml"/>
+        <mapper resource="mapper/ItemMapper.xml"/>
+        <mapper resource="mapper/OrderMapper.xml"/>
+    </mappers>
+
+</configuration>
