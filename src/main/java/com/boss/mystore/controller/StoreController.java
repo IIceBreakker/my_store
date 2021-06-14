@@ -2,6 +2,7 @@ package com.boss.mystore.controller;
 
 import cn.hutool.core.bean.BeanUtil;
 
+import com.boss.mystore.anno.PassToken;
 import com.boss.mystore.pojo.dto.AccountDTO;
 import com.boss.mystore.pojo.dto.ItemDTO;
 import com.boss.mystore.pojo.vo.AccountInfoVO;
@@ -12,6 +13,7 @@ import com.boss.mystore.service.AccountService;
 import com.boss.mystore.service.ItemService;
 import com.boss.mystore.service.OrderService;
 import com.boss.mystore.util.GenerateUUID;
+import com.boss.mystore.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,13 +44,19 @@ public class StoreController {
      * @param params 登录参数
      * @return res 成功或者失败返回相应的信息
      */
+    @PassToken
     @PostMapping("/login")
     public JSONResult<AccountInfoVO> login(@RequestBody LoginVO params) {
         AccountInfoVO accountInfoVO = new AccountInfoVO();
+
+        //to-do params校验
         AccountDTO accountDTO = accountService.getUser(params);
-        //将accountDTO的数据复制到accountVO中
-        BeanUtil.copyProperties(accountDTO, accountInfoVO);
+
         if (accountDTO != null) {
+            //将accountDTO的数据复制到accountVO中
+            BeanUtil.copyProperties(accountDTO, accountInfoVO);
+            //第一次登录设置token属性
+            accountInfoVO.setToken(JwtUtil.generateToken(accountDTO));
             return JSONResult.success(accountInfoVO);
         } else {
             return JSONResult.fail();

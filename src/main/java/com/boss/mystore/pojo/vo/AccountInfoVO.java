@@ -1,7 +1,6 @@
 package com.boss.mystore.pojo.vo;
 
 import com.boss.mystore.pojo.dto.AccountDTO;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,4 +12,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AccountInfoVO extends AccountDTO {
+
+    /**
+     * 要在第一次登录后返回给前端，所以token字段写在这里
+     */
+    private String token;
 }
